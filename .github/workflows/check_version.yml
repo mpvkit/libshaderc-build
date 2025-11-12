@@ -2,8 +2,8 @@ name: Check new version
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 1 * *'
+  # schedule:
+  #   - cron: '0 0 1 * *' # every month first day
 
 jobs:
   build:
@@ -62,6 +62,8 @@ jobs:
           add-paths: |
             ./Sources/BuildScripts/XCFrameworkBuild/main.swift
           title: "bump version to ${{ env.LATEST_VERSION }}"
-          body: "https://github.com/google/shaderc/blob/${{ env.LATEST_VERSION }}/CHANGES\n"
+          body: |
+            https://github.com/google/shaderc/blob/${{ env.LATEST_VERSION }}/CHANGES
+
+            https://github.com/google/shaderc/compare/${{ env.OLD_VERSION }}...${{ env.LATEST_VERSION }}
           commit-message: "chore: bump version to ${{ env.LATEST_VERSION }}"
-          
