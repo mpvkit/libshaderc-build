@@ -23,8 +23,8 @@ let package = Package(
 
         .binaryTarget(
             name: "Libshaderc_combined",
-            url: "https://github.com/mpvkit/libshaderc-build/releases/download/2025.4.0-xcode26/Libshaderc_combined.xcframework.zip",
-            checksum: "f5d8d4c5f031263c088cb2e51658c147194fab9361b810157d178b2b6424fad3"
+            url: "https://github.com/mpvkit/libshaderc-build/releases/download/2025.4.0-xcode/Libshaderc_combined.xcframework.zip",
+            checksum: "3c9fc7412db89810590cf3abda779298d4548eeab857f6c8598bea9a25bb18d3"
         ),
         //AUTO_GENERATE_TARGETS_END//
     ]
