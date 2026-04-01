@@ -8,7 +8,7 @@ let package = Package(
     products: [
         .library(
             name: "Libshaderc_combined", 
-            targets: ["Libshaderc_combined"]
+            targets: ["_Libshaderc_combined"]
         ),
     ],
     targets: [
@@ -23,8 +23,8 @@ let package = Package(
 
         .binaryTarget(
             name: "Libshaderc_combined",
-            url: "https://github.com/mpvkit/libshaderc-build/releases/download/2025.5.0/Libshaderc_combined.xcframework.zip",
-            checksum: "758047b615708575b580eb960a2d083f760a29dc462d6eaa360416c946ce433b"
+            url: "https://github.com/mpvkit/libshaderc-build/releases/download/2026.1.0/Libshaderc_combined.xcframework.zip",
+            checksum: "77a3d355993cf53843a394bf58262dab99cdd93f9e6fe31d5ca6e55b03866ce1"
         ),
         //AUTO_GENERATE_TARGETS_END//
     ]
