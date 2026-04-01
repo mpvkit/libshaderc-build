@@ -128,8 +128,10 @@ private class BuildShaderc: BaseBuild {
                 let shadercPC = destPkgConfigDir + "shaderc.pc"
                 let shadercSharedPC = destPkgConfigDir + "shaderc_shared.pc"
                 let shadercCombinedPC = destPkgConfigDir + "shaderc_combined.pc"
-                if !FileManager.default.fileExists(atPath: shadercPC.path) ||
-                    !FileManager.default.fileExists(atPath: shadercCombinedPC.path) {
+                if !FileManager.default.fileExists(atPath: shadercPC.path) {
+                    continue
+                }
+                if !FileManager.default.fileExists(atPath: shadercCombinedPC.path) {
                     continue
                 }
 
