@@ -48,7 +48,7 @@ enum Library: String, CaseIterable, BuildLibrary {
 
 private class BuildShaderc: BaseBuild {
     init(options: ArgumentOptions) {
-        super.init(library: .libshaderc, options: options)
+        super.init(library: Library.libshaderc, options: options)
     }
 
     override func beforeBuild() throws {
@@ -116,19 +116,20 @@ private class BuildShaderc: BaseBuild {
         ["libshaderc_combined"]
     }
 
-    override func packagePkgConfigRelease() throws {
-        try super.packagePkgConfigRelease()
+    override func packageRelease() throws {
+        try super.packageRelease()
 
         // change libshaderc_combined.pc to libshaderc.pc as default pkgconfig file
         // otherwise [libplacebo] will load shaderc failed
         let releaseDirPath = URL.currentDirectory + ["release"]
-        for platform in BaseBuild.platforms {
+        for platform in platforms() {
             for arch in architectures(platform) {
                 let destPkgConfigDir = releaseDirPath + [library.rawValue, "pkgconfig-example", platform.rawValue, arch.rawValue]
                 let shadercPC = destPkgConfigDir + "shaderc.pc"
                 let shadercSharedPC = destPkgConfigDir + "shaderc_shared.pc"
                 let shadercCombinedPC = destPkgConfigDir + "shaderc_combined.pc"
-                if !FileManager.default.fileExists(atPath: shadercPC.path) {
+                if !FileManager.default.fileExists(atPath: shadercPC.path) ||
+                    !FileManager.default.fileExists(atPath: shadercCombinedPC.path) {
                     continue
                 }
 
