@@ -8,7 +8,7 @@ let package = Package(
     products: [
         .library(
             name: "Libshaderc_combined", 
-            targets: ["Libshaderc_combined"]
+            targets: ["_Libshaderc_combined"]
         ),
     ],
     targets: [
