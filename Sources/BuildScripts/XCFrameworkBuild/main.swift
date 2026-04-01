@@ -1,17 +1,17 @@
 import Foundation
+import BuildShared
 
 do {
-    let options = try ArgumentOptions.parse(CommandLine.arguments)
-    try Build.performCommand(options)
-    
-    try BuildShaderc().buildALL()
+    let options = try BuildRunner.performCommand()
+
+    try BuildShaderc(options: options).buildALL()
 } catch {
     print(error.localizedDescription)
     exit(1)
 }
 
 
-enum Library: String, CaseIterable {
+enum Library: String, CaseIterable, BuildLibrary {
     case libshaderc
     var version: String {
         switch self {
@@ -34,8 +34,8 @@ enum Library: String, CaseIterable {
             return  [
                 .target(
                     name: "Libshaderc_combined",
-                    url: "https://github.com/mpvkit/libshaderc-build/releases/download/\(BaseBuild.options.releaseVersion)/Libshaderc_combined.xcframework.zip",
-                    checksum: "https://github.com/mpvkit/libshaderc-build/releases/download/\(BaseBuild.options.releaseVersion)/Libshaderc_combined.xcframework.checksum.txt"
+                    url: "https://github.com/mpvkit/libshaderc-build/releases/download/\(BuildRunner.options!.releaseVersion)/Libshaderc_combined.xcframework.zip",
+                    checksum: "https://github.com/mpvkit/libshaderc-build/releases/download/\(BuildRunner.options!.releaseVersion)/Libshaderc_combined.xcframework.checksum.txt"
                 ),
             ]
         }
@@ -44,9 +44,8 @@ enum Library: String, CaseIterable {
 
 
 private class BuildShaderc: BaseBuild {
-    init() {
-        super.init(library: .libshaderc)
-        
+    init(options: ArgumentOptions) {
+        super.init(library: .libshaderc, options: options)
     }
 
     override func beforeBuild() throws {
