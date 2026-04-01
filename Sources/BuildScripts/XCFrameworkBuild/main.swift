@@ -3,6 +3,7 @@ import BuildShared
 
 do {
     let options = try BuildRunner.performCommand()
+    Library.releaseVersion = options.releaseVersion
 
     try BuildShaderc(options: options).buildALL()
 } catch {
@@ -12,6 +13,8 @@ do {
 
 
 enum Library: String, CaseIterable, BuildLibrary {
+    static var releaseVersion = "0.0.0"
+
     case libshaderc
     var version: String {
         switch self {
@@ -34,8 +37,8 @@ enum Library: String, CaseIterable, BuildLibrary {
             return  [
                 .target(
                     name: "Libshaderc_combined",
-                    url: "https://github.com/mpvkit/libshaderc-build/releases/download/\(BuildRunner.options!.releaseVersion)/Libshaderc_combined.xcframework.zip",
-                    checksum: "https://github.com/mpvkit/libshaderc-build/releases/download/\(BuildRunner.options!.releaseVersion)/Libshaderc_combined.xcframework.checksum.txt"
+                    url: "https://github.com/mpvkit/libshaderc-build/releases/download/\(Self.releaseVersion)/Libshaderc_combined.xcframework.zip",
+                    checksum: "https://github.com/mpvkit/libshaderc-build/releases/download/\(Self.releaseVersion)/Libshaderc_combined.xcframework.checksum.txt"
                 ),
             ]
         }
